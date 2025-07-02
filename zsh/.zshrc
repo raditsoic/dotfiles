@@ -151,4 +151,7 @@ VIRTUAL_ENV_DISABLE_PROMPT=0
 export PATH=$PATH:/snap/bin
 
 # Cursor 
-export PATH="$PATH:/mnt/c/Users/radit/AppData/Local/Programs/cursor/resources/app/bin"
+LOCALAPPDATA=$(wslvar LOCALAPPDATA | sed 's/\\/\//g' | sed 's/C:/\/mnt\/c/')
+export PATH="$PATH:$LOCALAPPDATA/Programs/cursor/resources/app/bin"
+
+
