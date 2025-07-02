@@ -101,6 +101,10 @@ alias dcu='docker-compose up'
 alias dcb='docker-compose build'
 alias dcd='docker-compose down'
 alias dcr='docker-compose run'
+alias dcu='docker compose up'
+alias dcd='docker compose down'
+alias dcr='docker compose run'
+alias dcb='docker compose build'
 
 # Shell integrations
 source ~/.fzf.zsh
