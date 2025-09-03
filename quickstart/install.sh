@@ -43,3 +43,23 @@ if [[ "$SHELL" != "$(which $shell)" ]]; then
 else
     echo "Shell is already set to $shell."
 fi
+
+# install golang
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.25.1.linux-amd64.tar.gz
+
+# Install Rust
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+export CARGO_HOME="$HOME/.cargo"
+export PATH="$CARGO_HOME/bin:$PATH"
+
+# fd: find alternative
+sudo apt install fd-find
+
+# zoxide: cd alternative
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
+# eza: ls alternative
+cargo install eza
+
+# dust: du alternative
+cargo install du-dust

@@ -1,3 +1,9 @@
+# dotfiles
+
+## **quickstart**
+
+Init configurations here
+
 ## **zsh**
 
 Make sure zsh installed and change shell to zsh.

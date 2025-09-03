@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if [ -n "$USERPROFILE" ]; then
+  export PATH="$PATH:/mnt/c/$(echo $USERPROFILE | sed 's#\\#/#g' | cut -d/ -f3-)/AppData/Local/Programs/cursor/resources/app/bin"
+fi

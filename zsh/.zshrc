@@ -114,6 +114,9 @@ export NVM_DIR="$HOME/.nvm"
 alias py=/usr/bin/python3
 alias python=/usr/bin/python3
 
+# Zoxide
+eval "$(zoxide init zsh)"
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
 
@@ -127,17 +130,22 @@ export PHP_INI_SCAN_DIR="$HOME/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 export PNPM_HOME="$HOME/.local/share/pnpm"
 export PATH="$PATH:$HOME/.local/bin/jupyter"
 
-# pnpm
-export PNPM_HOME="/%HOME/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+# Golang
+export PATH=$PATH:/usr/local/go/bin
+export PATH="$PATH:$(go env GOPATH)/bin"
 
-. "$HOME/.cargo/env"
+# Rust
+export CARGO_HOME="$HOME/.cargo"
+export PATH="$CARGO_HOME/bin:$PATH"
+export RUSTUP_HOME="$HOME/.rustup"
+if [ -f "$HOME/.cargo/env" ]; then
+  source "$HOME/.cargo/env"
+fi
+
+# Jupyter
 export PATH="$PATH:/%HOME/.local/bin/jupyter"
 
+# Spark
 export SPARK_HOME=/opt/spark
 export PATH=$SPARK_HOME/bin:$PATH
 export PATH="$PATH:$(pwd)/bin"
@@ -151,7 +159,8 @@ VIRTUAL_ENV_DISABLE_PROMPT=0
 export PATH=$PATH:/snap/bin
 
 # Cursor 
-LOCALAPPDATA=$(wslvar LOCALAPPDATA | sed 's/\\/\//g' | sed 's/C:/\/mnt\/c/')
-export PATH="$PATH:$LOCALAPPDATA/Programs/cursor/resources/app/bin"
+if [ -f ~/.localrc ]; then
+  source ~/.localrc
+fi
 
 
