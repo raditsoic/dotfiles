@@ -106,6 +106,19 @@ alias dcd='docker compose down'
 alias dcr='docker compose run'
 alias dcb='docker compose build'
 
+# Kube Alias
+alias kc='kubectl'
+alias kd='kind'
+
+# Terraform Alias
+alias tf='terraform'
+
+# kubectl completions
+if command -v kubectl >/dev/null 2>&1; then
+  source <(kubectl completion zsh)
+  compdef kc=kubectl
+fi
+
 # Shell integrations
 source ~/.fzf.zsh
 export NVM_DIR="$HOME/.nvm"
@@ -114,14 +127,11 @@ export NVM_DIR="$HOME/.nvm"
 alias py=/usr/bin/python3
 alias python=/usr/bin/python3
 
-# Zoxide
-eval "$(zoxide init zsh)"
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$PATH:$(go env GOPATH)/bin"
@@ -163,4 +173,23 @@ if [ -f ~/.localrc ]; then
   source ~/.localrc
 fi
 
+# Zoxide
+eval "$(zoxide init zsh)"
 
+# bun completions
+[ -s "/home/soic/.bun/_bun" ] && source "/home/soic/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# vagrant
+export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS=1
+
+# >>>> Vagrant command completion (start)
+fpath=(/opt/vagrant/embedded/gems/gems/vagrant-2.4.9/contrib/zsh $fpath)
+compinit
+# <<<<  Vagrant command completion (end)
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
