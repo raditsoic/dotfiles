@@ -118,6 +118,9 @@ export NVM_DIR="$HOME/.nvm"
 alias py=/usr/bin/python3
 alias python=/usr/bin/python3
 
+# Local binaries
+export PATH="$HOME/.local/bin:$PATH"
+
 # Golang
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$PATH:$(go env GOPATH)/bin"
