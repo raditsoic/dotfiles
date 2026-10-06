@@ -44,6 +44,15 @@ else
     echo "Shell is already set to $shell."
 fi
 
+# Install stow (dotfiles symlink manager)
+if ! command -v stow &> /dev/null; then
+    echo "Installing stow..."
+    sudo apt install -y stow
+    echo "Stow installed successfully."
+else
+    echo "Stow is already installed."
+fi
+
 # install golang
 rm -rf /usr/local/go && tar -C /usr/local -xzf go1.25.1.linux-amd64.tar.gz
 
