@@ -18,7 +18,7 @@ Stow the zsh directory with `stow zsh`
 
 ## **workstation** — cloud
 
-Provisions a cloud workstation (omp, docker, cloudflared, tailscale, fzf, websocat, uv, bun):
+Installs user-level tools on the cloud workstation (fzf, websocat, uv, bun, omp). System packages — apt essentials, Docker, Cloudflared, Tailscale, zsh/stow — come from the Ansible playbook in the cloud-ws repo:
 
 `bash workstation/install.sh`
 
