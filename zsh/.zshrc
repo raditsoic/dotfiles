@@ -81,6 +81,23 @@ bindkey '^ ' autosuggest-accept             # Ctrl+Space accept suggestion
 bindkey '^F' forward-char                   # Ctrl+F forward one char
 
 #------------------------------------------------------------------------------
+# Report cwd to the terminal (OSC 7) so WezTerm splits open in the same dir
+#------------------------------------------------------------------------------
+_osc7_cwd() {
+  local LC_ALL=C i ch hex out=""
+  for ((i = 1; i <= ${#PWD}; i++)); do
+    ch=${PWD[i]}
+    case $ch in
+      [a-zA-Z0-9/._~-]) out+=$ch ;;
+      *) printf -v hex '%%%02X' "'$ch"; out+=$hex ;;
+    esac
+  done
+  printf '\e]7;file://%s%s\e\\' "${HOST}" "$out"
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _osc7_cwd
+
+#------------------------------------------------------------------------------
 # History
 #------------------------------------------------------------------------------
 HISTSIZE=5000
@@ -153,8 +170,6 @@ export NVM_DIR="$HOME/.nvm"
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
-# Zoxide
-eval "$(zoxide init zsh)"
 
 # Bun
 [ -s "/home/soic/.bun/_bun" ] && source "/home/soic/.bun/_bun"
@@ -216,3 +231,6 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+
+# Zoxide (after PATH setup, ~/.local/bin holds zoxide)
+eval "$(zoxide init zsh)"
