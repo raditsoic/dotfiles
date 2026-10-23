@@ -123,7 +123,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Golang
 export PATH=$PATH:/usr/local/go/bin
-export PATH="$PATH:$(go env GOPATH)/bin"
+export PATH="$PATH:$HOME/go/bin"
 
 # Rust
 export CARGO_HOME="$HOME/.cargo"

@@ -53,8 +53,13 @@ else
     echo "Stow is already installed."
 fi
 
-# install golang
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.25.1.linux-amd64.tar.gz
+# install golang (downloads the tarball; skips if this version is already installed)
+go_version=1.25.1
+if ! /usr/local/go/bin/go version 2>/dev/null | grep -q "go${go_version} "; then
+    curl -fsSL "https://go.dev/dl/go${go_version}.linux-amd64.tar.gz" -o "/tmp/go${go_version}.linux-amd64.tar.gz"
+    sudo rm -rf /usr/local/go
+    sudo tar -C /usr/local -xzf "/tmp/go${go_version}.linux-amd64.tar.gz"
+fi
 
 # Install Rust
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
