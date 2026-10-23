@@ -55,7 +55,9 @@ config.keys = {
   { key = 'v', mods = 'CTRL', action = act.PasteFrom 'Clipboard' },
   -- WezTerm default Alt+Enter = fullscreen; send ESC CR to the shell instead
   { key = 'Enter', mods = 'ALT', action = act.SendString '\x1b\r' },
+  { key = '=', mods = 'CTRL', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
   { key = '+', mods = 'CTRL', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+  { key = '=', mods = 'CTRL|SHIFT', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
   { key = '+', mods = 'CTRL|SHIFT', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
   { key = '-', mods = 'CTRL', action = act.CloseCurrentPane { confirm = false } },
 }
